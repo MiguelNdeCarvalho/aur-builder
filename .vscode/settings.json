@@ -2,5 +2,7 @@
     "python.pythonPath": "webui/venv/bin/python3.9",
     "python.analysis.extraPaths": [
         "./webui"
-    ]
+    ],
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true
 }
