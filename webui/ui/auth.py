@@ -19,6 +19,7 @@ def login():
         if user:
             if check_password_hash(user.password, password):
                 flash('Successfully logged in', 'success')
+                login_user(user, remember=True)
                 return redirect(url_for('views.home'))
             else:
                 flash('Incorrect username or password', 'error')
@@ -29,8 +30,10 @@ def login():
 
 
 @auth.route('/logout')
+@login_required
 def logout():
-    return "<p>logout</p>"
+    logout_user()
+    return redirect(url_for('auth.login'))
 
 
 @auth.route('/register', methods=['GET', 'POST'])
