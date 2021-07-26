@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_toastr import Toastr
 
+toastr = Toastr()
+
 
 def create_app():
     app = Flask(__name__)
@@ -12,6 +14,6 @@ def create_app():
     app.register_blueprint(views)
     app.register_blueprint(auth)
 
-    toastr = Toastr(app)
+    toastr.init_app(app)
 
     return app
