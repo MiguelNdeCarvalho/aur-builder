@@ -1,5 +1,5 @@
 from flask import Flask
-from flask.helpers import url_for
+from flask_toastr import Toastr
 
 
 def create_app():
@@ -11,5 +11,7 @@ def create_app():
 
     app.register_blueprint(views)
     app.register_blueprint(auth)
+
+    toastr = Toastr(app)
 
     return app
