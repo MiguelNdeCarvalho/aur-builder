@@ -1,5 +1,10 @@
 from flask import Blueprint, request, flash, redirect, url_for
 from flask.templating import render_template
+from .models import User
+from werkzeug.security import generate_password_hash, check_password_hash
+from . import db
+from flask_login import login_user, login_required, logout_user, current_user
+
 
 auth = Blueprint('auth', __name__)
 
@@ -36,16 +41,20 @@ def register():
             flash('Passwords don\'t match.', category='error')
         elif len(password1) < 6:
             flash('Password must be at least 6 characters.', category='error')
-        # else:
-        #     new_user = User(email=email, first_name=first_name, password=generate_password_hash(
-        #         password1, method='sha256'))
-        #     db.session.add(new_user)
-        #     db.session.commit()
-        #     login_user(new_user, remember=True)
-        #     flash('Account created!', category='success')
-        #     return redirect(url_for('views.home'))
         else:
-            flash('Created account with success.', category='success')
+
+            if len(User.query.all()) == 0:
+                role = "Admin"
+            else:
+                role = "User"
+            new_user = User(email=email,
+                            password=generate_password_hash(password1,
+                                                            method='sha256'),
+                            name=name, role=role)
+            db.session.add(new_user)
+            db.session.commit()
+            login_user(new_user, remember=True)
+            flash('Account created!', category='success')
             return redirect(url_for('views.home'))
 
     return render_template("register.html")
