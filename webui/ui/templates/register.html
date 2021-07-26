@@ -1,18 +1,25 @@
 {% extends "users_template.html" %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Register{% endblock %}
 
 {% block content %}
-<div class="login-box">
-  <!-- /.login-logo -->
+<div class="register-box">
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
       <a href="/" class="h1"><b>AUR</b>Builder</a>
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Login</p>
+      <p class="login-box-msg">Register</p>
 
       <form method="POST">
+        <div class="input-group mb-3">
+          <input type="text" id="name" name="name" class="form-control" placeholder="Full name">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
         <div class="input-group mb-3">
           <input type="email" id="email" name="email" class="form-control" placeholder="Email">
           <div class="input-group-append">
@@ -22,7 +29,15 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+          <input type="password" id="password1" name="password1" class="form-control" placeholder="Password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" id="password2" name="password2" class="form-control" placeholder="Retype password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -34,14 +49,14 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
           </div>
           <!-- /.col -->
         </div>
       </form>
+
     </div>
-    <!-- /.card-body -->
-  </div>
-  <!-- /.card -->
+    <!-- /.form-box -->
+  </div><!-- /.card -->
 </div>
 {% endblock %}
