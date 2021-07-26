@@ -14,8 +14,17 @@ def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
-        flash("Wrong Email or Password!", category='error')
-    
+        user = User.query.filter_by(email=email).first()
+
+        if user:
+            if check_password_hash(user.password, password):
+                flash('Successfully logged in', 'success')
+                return redirect(url_for('views.home'))
+            else:
+                flash('Incorrect username or password', 'error')
+        else:
+            flash('Incorrect email or password', 'error')
+
     return render_template('login.html')
 
 
