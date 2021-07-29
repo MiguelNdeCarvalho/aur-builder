@@ -55,15 +55,23 @@ def register():
             flash('Password must be at least 6 characters.', 'error')
         else:
             if len(User.query.all()) == 0:
-                role = "Admin"
+                new_user = User(email=email,
+                                password=generate_password_hash(password1,
+                                                                method='pbkdf2'
+                                                                ':sha256'
+                                                                ':100',
+                                                                salt_length=16
+                                                                ),
+                                name=name, admin=True, active=True)
             else:
-                role = "User"
-            new_user = User(email=email,
-                            password=generate_password_hash(password1,
-                                                            method='pbkdf2:'
-                                                            'sha256:100',
-                                                            salt_length=16),
-                            name=name, role=role)
+                new_user = User(email=email,
+                                password=generate_password_hash(password1,
+                                                                method='pbkdf2'
+                                                                ':sha256'
+                                                                ':100',
+                                                                salt_length=16
+                                                                ),
+                                name=name)
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
