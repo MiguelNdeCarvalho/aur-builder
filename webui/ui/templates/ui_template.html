@@ -46,7 +46,13 @@
                 <img src="{{ gravatar }}" class="img-circle elevation-2" alt="User Image">
                 <p>
                     <h5>{{ user.name }}</h5>
-                    <strong>Role: </strong>{{ user.role }}
+                    {% if user.is_admin() %}
+                      <strong>Role:</strong>
+                      Admin
+                    {% elif not user.is_admin() %}
+                      <strong>Role:</strong>
+                      User
+                    {% endif %}
                 </p>
               </li>
               <!-- Menu Footer-->
