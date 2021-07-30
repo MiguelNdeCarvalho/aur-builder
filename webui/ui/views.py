@@ -28,6 +28,17 @@ def home():
         return "oi"
 
 
+@views.route('/users')
+@login_required
+def users():
+    if current_user.is_active() and current_user.is_admin():
+        return render_template('users.html', user=current_user,
+                               users=User.query.all(),
+                               gravatar=getGravatar(current_user, 160))
+    else:
+        return "403"
+
+
 def getGravatar(user, size):
     g = Gravatar(user.email)
     return g.get_image(size=size)
