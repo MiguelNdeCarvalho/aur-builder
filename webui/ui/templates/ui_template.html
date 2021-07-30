@@ -94,6 +94,7 @@
                 </a>
               </li>
         </ul>
+        {% if user.is_admin() %}
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
                 <a href="/users" class="nav-link">
@@ -110,6 +111,7 @@
                 </a>
               </li>
         </ul>
+        {% endif%}
       </nav>
       <!-- /.sidebar-menu -->
     </div>
